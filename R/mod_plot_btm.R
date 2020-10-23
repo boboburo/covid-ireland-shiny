@@ -1,5 +1,5 @@
 #rm(mod_dataviz_bar_server, mod_dataviz_bar_ui, barApp)
-
+library(shiny)
 library(ggplot2)
 library(ggthemes)
 library(dplyr)
@@ -28,24 +28,11 @@ mod_dataviz_bar_server <- function(id,cnty="Dublin",type = "bar",r){
   output$plot1<- renderPlot({
     
     if(type == "bar"){
-    
-      plot_title <- reactive(glue::glue(
-        'Daily ',
-        'count of cases ',
-        'in {clicked_cnty()}'))
-      plot_subtitle <- reactive(glue::glue(
-        '{days_between()} days up until {format(end_date(), "%A, %B %d, %Y")}'))
-    
-      plot <- dailycases %>%
-        dplyr::filter(time_stamp <= end_date()) %>%
-        dplyr::filter(time_stamp >= (end_date()- lubridate::days(days_between()))) %>%
-        dplyr::filter(county_name == clicked_cnty()) %>% 
-        ggplot2::ggplot(aes(x = time_stamp, y = day_cases)) + 
-        ggplot2::geom_col() +
-        ggplot2::labs(title = plot_title(),
-                      subtitle = plot_subtitle(),
-                      y = "Daily Case Count\n",
-                      x = "")
+      
+      #Call to function to create the initial plot
+      plot <- plot_btm(dailycases, y_val = "day_cases",
+                     county = clicked_cnty(), end_date = end_date(), 
+                     days_before = days_between(), type = "bar")
       
       if(r$smth_7() == TRUE){
         plot <- plot +
@@ -63,23 +50,11 @@ mod_dataviz_bar_server <- function(id,cnty="Dublin",type = "bar",r){
       
       if(type == "line"){
         
+        #call to function to create initial plot
+        plot <- plot_B(dailycases, y_val = "plt1_x",
+               county = clicked_cnty(), end_date = end_date(), 
+               days_before = days_between(), type = "line")
         
-        plot_title <- reactive(glue::glue(
-          'Trend of cases per 100k ',
-          'in {clicked_cnty()}'))
-        plot_subtilte <- reactive(glue::glue(
-          '{days_between()} days up until {format(end_date(), "%A, %B %d, %Y")}'))
-        
-        plot <- dailycases %>%
-          dplyr::filter(time_stamp <= end_date()) %>%
-          dplyr::filter(time_stamp >= (end_date()- lubridate::days(days_between()))) %>%
-          dplyr::filter(county_name == clicked_cnty()) %>% 
-          ggplot2::ggplot(aes(x = time_stamp, y = plt1_x)) + 
-          ggplot2::geom_line() +
-          ggplot2::labs(title = plot_title(),
-                        subtitle = plot_subtilte(),
-                        y = "7 days cases per 100k\n",
-                        x = "")
         
         if(r$smth_7() == TRUE){
           plot <- plot +
