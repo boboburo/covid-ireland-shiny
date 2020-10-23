@@ -1,6 +1,6 @@
 # covid-ireland-shiny
 
-Shiny application visualisng the Covid Situation in the republic of Ireland. The app is currently publish on the RStudio shinyapps.io platform at 
+Shiny application visualising the Covid Situation in the Republic of Ireland. The app is currently publish on the RStudio shinyapps.io platform at 
 
 https://iboboburo.shinyapps.io/covid-ireland/
 
