@@ -1,0 +1,13 @@
+name: covid-ireland
+title: covid-ireland
+username:
+account: iboboburo
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3064512
+bundleId: 3766273
+url: https://iboboburo.shinyapps.io/covid-ireland/
+when: 1603281253.41801
+lastSyncTime: 1603281253.41803
+asMultiple: FALSE
+asStatic: FALSE
