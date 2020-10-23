@@ -5,11 +5,9 @@ Shiny application visualising the Covid Situation in the Republic of Ireland. Th
 https://iboboburo.shinyapps.io/covid-ireland/
 
 
-# Status
-
 ## Installation 
 
-Fork the repo 
+If you want to run local or extend you can do so by ...
 
 
 # To do
@@ -22,3 +20,4 @@ Fork the repo
 - create Docker ignore file 
 - create docker image and publish ?
 - add other countries ?  
+- reduce dependencies
