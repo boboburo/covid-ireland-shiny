@@ -10,21 +10,39 @@ on: [workflow_dispatch]
   #pull_request:
     #branches: [ master ]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  deploy-shiny:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: checkout the code
+      - name: Checkout repo
         uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
+      - name: setup R
+        uses: r-lib/actions/setup-r@master
+      - name: Install shiny
+        run: |
+          install.packages(c("shiny", "rsconnect"), type = "binary")
       - name: Push to shiny apps
         run: |
           Rscript -e 'rsconnect::setAccountInfo(name="iboboburo", token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})'
           Rscript -e 'rsconnect::deployApp(appName = "covid-ireland")' 
+
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+#jobs:
+  # This workflow contains a single job called "build"
+ # build:
+    # The type of runner that the job will run on
+  #  runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+  #  steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+   #   - name: checkout the code
+    #    uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+     # - name: Push to shiny apps
+      #  run: |
+          #Rscript -e 'rsconnect::setAccountInfo(name="iboboburo", token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})'
+          #Rscript -e 'rsconnect::deployApp(appName = "covid-ireland")' 
