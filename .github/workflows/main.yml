@@ -11,8 +11,7 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: install-packages
         run: |
-         Rscript -e "install.packages(c('rsconnect','devtools'), type  = 'binary)"
-         Rscript -e "devtools::install_github('rstudio/shinyapps')" 
+         Rscript -e "install.packages(c('rsconnect'), type  = 'binary)"
       - name: authorise-shiny
         run: |
          Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
