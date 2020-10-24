@@ -26,5 +26,5 @@ jobs:
       # Runs a single command using the runners shell
       - name: Push to shiny apps
         run: |
-          Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
-          Rscript -e "rsconnect::deployApp(appName = 'covid-ireland')" 
+          Rscript -e 'rsconnect::setAccountInfo(name="iboboburo", token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})'
+          Rscript -e 'rsconnect::deployApp(appName = 'covid-ireland')' 
