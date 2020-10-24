@@ -9,26 +9,29 @@ ui <-  shinyUI(
                      "The scatter plot is a recreation of this <a href='https://www.ft.com/content/a2dbf1c0-dcce-4eae-b1f6-f2c31bf0db8a' class='alert-link'>plot</a> from the Finanical Times.",
                      "</div>"
                    )),
-            fluidRow(
-              column(width = 12,
-                     mod_dataviz_scatter_ui("dataviz_scatter_ui_1"))),
+            fluidRow(column(width = 11, offset = 1,
+              tabsetPanel(type = "tabs",
+                tabPanel("Covid Rates",mod_dataviz_scatter_ui("dataviz_scatter_ui_1"))))
+              ),
             fluidRow(
               
               
               # Sidebar with a slider input
               column(width = 3, 
-                     wellPanel(
+                #     wellPanel(
                        # tags$style(".well {background-color:#33FFC4;}"),
-                       sliderInput("slider_dlb_date",label = "Date Range", 
-                                   value = c(min(dailycases$time_stamp),max(dailycases$time_stamp)),
-                                   min = min(lubridate::ymd("2020-04-01")), 
-                                   max = max(dailycases$time_stamp),
-                                   dragRange = FALSE,
-                                   timeFormat = "%Y-%m-%d",
-                                   animate = FALSE),
+                       dateRangeInput("slider_dlb_date", label = "Date Range", 
+                                      start = min(lubridate::ymd("2020-04-01")), 
+                                      end = max(dailycases$time_stamp), 
+                                      min = min(lubridate::ymd("2020-04-01")), 
+                                      max = max(dailycases$time_stamp),
+                                      format = "M-dd", 
+                                      startview = "month", 
+                                      weekstart = 0,
+                                      language = "en", separator = " to ", width = '100%'),
                        checkboxInput("ck_7day", "7 day smoothed", FALSE),
                        checkboxInput("ck_14day", "14 day smoothed", FALSE)
-                     )),
+                     ),#)
               
               # Show a plot of the generated distribution
               column(width = 9,
