@@ -31,6 +31,7 @@ RUN Rscript -e 'renv::restore()'
 # copy R files
 COPY app.R . app/
 COPY R/ . app/
+COPY DATA/ . app/
 
 # expose port
 EXPOSE 3838
