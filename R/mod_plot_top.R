@@ -5,13 +5,18 @@
 
 mod_dataviz_scatter_ui <- function(id){
   tagList(
-    sliderInput(NS(id,"slider_sct_date"),label = "Focus Date", 
-                value = max(dailycases$time_stamp),
-                min = min(lubridate::ymd("2020-04-01")), 
-                max = max(dailycases$time_stamp),
-                dragRange = FALSE,
-                timeFormat = "%b-%d",
-                animate = TRUE),
+    # sliderInput(NS(id,"slider_sct_date"),label = "Focus Date", 
+    #             value = max(dailycases$time_stamp),
+    #             min = min(lubridate::ymd("2020-04-01")), 
+    #             max = max(dailycases$time_stamp),
+    #             dragRange = FALSE,
+    #             timeFormat = "%b-%d",
+    #             animate = TRUE),
+    dateInput(NS(id,"slider_sct_date"),label = "Focus Date",
+              value = max(dailycases$time_stamp),
+              min = min(lubridate::ymd("2020-04-01")), 
+              max = max(dailycases$time_stamp),
+              format = "dd-M-yyyy", width = validateCssUnit("15%")),
   plotOutput(NS(id, "plotS"),
                  click = clickOpts(id = NS(id,"plotS_click")))
   )

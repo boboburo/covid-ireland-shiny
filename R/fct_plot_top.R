@@ -40,8 +40,8 @@ plot_top <- function(df, x_val, y_val, pnt_color = "red", size_col, label_col, f
   
   
   plot <- plot +
-    labs(title = glue('COVID rates per 100k (based on 7 day cummulative).\n'),
-         subtitle = glue('{format(date_focus, "%A, %B %d, %Y")}, (Click on county to explore in detail below)'),
+    labs(title = glue('COVID rates per 100k (Click on county to explore in detail below).\n'),
+         subtitle = glue('{format(date_focus, "%A, %B %d, %Y")}'),
          x = '\nCount of 14 days cases, per 100k people',
          y = 'Weekly change\n',
          size = 'Population Size ~')
@@ -61,7 +61,7 @@ plot_top <- function(df, x_val, y_val, pnt_color = "red", size_col, label_col, f
     ggplot2::theme(legend.position="top",
                    axis.title.x = element_text(size = 14),
                    axis.title.y = element_text(size =14),
-                   axis.text = element_text(size = 10))
+                   axis.text = element_text(size = 12))
   
   
   
