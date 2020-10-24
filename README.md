@@ -23,7 +23,7 @@ renv::snapshot()
 ```
 
 
-## Installation 
+## Installation & Dev
 
 If you want to run local or extend you can do so by pulling the repo, then either setup the project for development locally
 
@@ -34,13 +34,19 @@ renv::restore()
 
 TODO: Create a Dockerfile fo development
 
-## Deployment
-
-The app can be deployed in **online** or **offline** mode. Offline is typically used in development and connect to local stored version of the data. The option can be changed the *R/global.R* file. 
+The app can be run in **online** or **offline** mode. Offline is typically used in development and connect to local stored version of the data. The option can be changed the *R/global.R* file. 
 
 >TODO: Find nicer way of passing this argument. 
 
 This requires creating a SQLite db with grab of the data. This is detailed in the *DATA/create_db_table.md* file. 
+
+### Testing 
+
+There are a number of tests provided. To run 
+
+```r
+shiny::runTests()
+```
 
 ## Deployment 
 
@@ -89,15 +95,16 @@ docker run -d --rm -p 3838:3838 covid-irl-image
 
 # TODO
 
-[x] add tests
-[] add Ireland as a "county" 
-[x] write up installation. 
-[x] add data in sqlite for Docker container
-[x] update dockerFile
-[] create Docker ignore file 
-[] create docker image and publish ?
-[] add other countries ?  
-[] reduce dependencies
+-[x] add tests
+-[] add Ireland as a "county" 
+-[x] write up installation. 
+-[x] add data in sqlite for Docker container
+-[x] update dockerFile
+-[] create Docker ignore file 
+-[] create docker image and publish ?
+-[] add other countries ?  
+-[] reduce dependencies
+-[] add test check to GA
 
 ## Blog write up points
 
