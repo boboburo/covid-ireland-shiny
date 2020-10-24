@@ -21,3 +21,13 @@ If you want to run local or extend you can do so by ...
 - create docker image and publish ?
 - add other countries ?  
 - reduce dependencies
+
+## blog write up. 
+
+- project template
+- start with plots
+- then modules
+- then stick it together
+- move to tests - note on naming convention. 
+- docker file vs shiny apps.  
+- discuss golem as option
