@@ -96,15 +96,15 @@ docker run -d --rm -p 3838:3838 covid-irl-image
 # TODO
 
 - [x] add tests
-- [] add Ireland as a "county" 
+- [ ] add Ireland as a "county" 
 - [x] write up installation. 
 - [x] add data in sqlite for Docker container
 - [x] update dockerFile
-- [] create Docker ignore file 
-- [] create docker image and publish ?
-- [] add other countries ?  
-- [] reduce dependencies
-- [] add test check to GA
+- [ ] create Docker ignore file 
+- [ ] create docker image and publish ?
+- [ ] add other countries ?  
+- [ ] reduce dependencies
+- [ ] add test check to GA
 
 ## Blog write up points
 
