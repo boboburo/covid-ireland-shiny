@@ -8,9 +8,9 @@ https://iboboburo.shinyapps.io/coviddash/
 
 Initially I was pulling data from [Ireland Covid Data Hub](https://covid19ireland-geohive.hub.arcgis.com/) and specifically from [here](https://opendata.arcgis.com/datasets/d9be85b30d7748b5b7c09450b8aede63_0.csv). However this proved to be buggy and often times didn't return the full data dataset 
 
-TODO: Write some test for this based on the return the count and comparing with the downloaded data ? 
+>TODO: Write some test for this based on the return the count and comparing with the downloaded data ? 
 
-After a search I moved to data pull to [Irelands Open Data Portal](https://data.gov.ie/) and grabbed the [csv data](https://opendata-geohive.hub.arcgis.com/datasets/d9be85b30d7748b5b7c09450b8aede63_0.csv?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D). This has proved to be more stable. 
+I changed the data pull to [Irelands Open Data Portal](https://data.gov.ie/) and grabbed the [csv data](https://opendata-geohive.hub.arcgis.com/datasets/d9be85b30d7748b5b7c09450b8aede63_0.csv?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D). This has proved to be more stable. 
 
 ## Development
 
@@ -25,29 +25,34 @@ renv::snapshot()
 
 ## Installation 
 
-If you want to run local or extend you can do so by ...
+If you want to run local or extend you can do so by pulling the repo, then either setup the project for development locally
 
-## Docker
-
-Nice guide written [here](https://www.statworx.com/ch/blog/how-to-dockerize-shinyapps/)
-
-Create the docker image
-```bash
-docker build -t covid-irl-image . 
+```r
+install.packages("renv")
+renv::restore()
 ```
 
-Run the image 
-
-```bash
-docker run -d --rm -p 3838:3838 covid-irl-image
-```
-
+TODO: Create a Dockerfile fo development
 
 ## Deployment
 
-- The app can dpeloyed directly from within R Studio to shinyapps.io
+The app can be deployed in **online** or **offline** mode. Offline is typically used in development and connect to local stored version of the data. The option can be changed the *R/global.R* file. 
 
-- Alternatively github action can be setup to trigger on a pull request to shiny
+>TODO: Find nicer way of passing this argument. 
+
+This requires creating a SQLite db with grab of the data. This is detailed in the *DATA/create_db_table.md* file. 
+
+## Deployment 
+
+For all deployment, the *R/global.R* file *mode* should be set to **online** - alternatively you need to upload the SQLite db. 
+
+### RStudio ShinyApps
+
+The app can deployed directly from within R Studio to shinyapps.io
+
+### Github Actions
+
+There a Github Action setup in the repo, this pushes to shinyapps.io on a pull request to the *master* branch. It can also be activated manually. The structure of the workflow is below. You need to add the **secrets** in the github repo. 
 
 ```yaml
 jobs:
@@ -62,24 +67,39 @@ jobs:
          Rscript -e "renv::restore()"
       - name: authorise-shiny
         run: |
-         Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
-         Rscript -e "rsconnect::deployApp(appName = 'coviddash')"
+         Rscript -e "rsconnect::setAccountInfo(name='yourAccount', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
+         Rscript -e "rsconnect::deployApp(appName = 'yourAppName')"
 ```
 
+### Docker
 
-# To do
+There is a nice guide to dockerising shiny apps [here](https://www.statworx.com/ch/blog/how-to-dockerize-shinyapps/). A Dockerfile is provided. 
 
-- add tests
-- add Ireland as a "county" 
-- write up installation. 
-- add data in sqlite for Docker container
-- update dockerFile
-- create Docker ignore file 
-- create docker image and publish ?
-- add other countries ?  
-- reduce dependencies
+Create the docker image
 
-## blog write up. 
+```bash
+docker build -t covid-irl-image . 
+```
+
+Run the image 
+
+```bash
+docker run -d --rm -p 3838:3838 covid-irl-image
+```
+
+# TODO
+
+[x] add tests
+[] add Ireland as a "county" 
+[x] write up installation. 
+[x] add data in sqlite for Docker container
+[x] update dockerFile
+[] create Docker ignore file 
+[] create docker image and publish ?
+[] add other countries ?  
+[] reduce dependencies
+
+## Blog write up points
 
 - project template
 - start with plots
