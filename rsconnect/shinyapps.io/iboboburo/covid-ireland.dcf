@@ -5,10 +5,10 @@ account: iboboburo
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 3064512
-bundleId: 3775731
+bundleId: 3777435
 url: https://iboboburo.shinyapps.io/covid-ireland/
-when: 1603485606.44638
-lastSyncTime: 1603485606.44639
+when: 1603538272.35162
+lastSyncTime: 1603538272.35164
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: Dockerfile
+ignoredFiles: .here|Dockerfile|README.md|DATA/covid-ireland.db|DATA/create_db_table.md
