@@ -1,5 +1,14 @@
-on: [push, pull_request, workflow_dispatch]
-
+on:
+  # Trigger the workflow on push or pull request,
+  # but only for the master branch or can kick off manually 
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+      
 name: deploy-shiny
 
 jobs:
