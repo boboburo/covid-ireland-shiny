@@ -51,7 +51,7 @@ mod_dataviz_bar_server <- function(id,cnty="Dublin",type = "bar",r){
       if(type == "line"){
         
         #call to function to create initial plot
-        plot <- plot_B(dailycases, y_val = "plt1_x",
+        plot <- plot_btm(dailycases, y_val = "plt1_x",
                county = clicked_cnty(), end_date = end_date(), 
                days_before = days_between(), type = "line")
         
