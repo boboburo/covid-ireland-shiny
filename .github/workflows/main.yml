@@ -1,48 +1,19 @@
-# This is a basic workflow to help you get started with Actions
+#on: [push, pull_request]
+on: [workflow_dispatch]
 
-name: deploy shinyapps.io
-
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
-on: [workflow_dispatch]  
-  #push:
-   # branches: [ master ]
-  #pull_request:
-    #branches: [ master ]
+name: deploy-shiny
 
 jobs:
   deploy-shiny:
     runs-on: macOS-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-      - name: setup R
-        uses: r-lib/actions/setup-r@master
-      - name: Install rsconnect
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+      - name: install-packages
         run: |
-          Rscript -e "install.packages(c('rsconnect'))"
-      - name: Push to shiny apps
+         Rscript -e "install.packages(c('shiny', 'rsconnect', 'remotes'), type = 'binary')"
+         Rscript -e "remotes::install_deps(type = 'binary', force = FALSE)"
+      - name: authorise-shiny
         run: |
-          Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
-          Rscript -e "rsconnect::deployApp(appName = 'coviddash')" 
-
-
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
-#jobs:
-  # This workflow contains a single job called "build"
- # build:
-    # The type of runner that the job will run on
-  #  runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-  #  steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-   #   - name: checkout the code
-    #    uses: actions/checkout@v2
-
-      # Runs a single command using the runners shell
-     # - name: Push to shiny apps
-      #  run: |
-          #Rscript -e 'rsconnect::setAccountInfo(name="iboboburo", token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})'
-          #Rscript -e 'rsconnect::deployApp(appName = "covid_ireland")' 
+         Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
+         Rscript -e "rsconnect::deployApp(appName = 'coviddash')"
