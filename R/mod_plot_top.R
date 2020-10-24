@@ -1,6 +1,8 @@
 
 
 #rm(mod_dataviz_scatter_server, mod_dataviz_scatter_ui , scatterApp)
+# source(fct_plot_top.R)
+
 mod_dataviz_scatter_ui <- function(id){
   tagList(
     sliderInput(NS(id,"slider_sct_date"),label = "Focus Date", 

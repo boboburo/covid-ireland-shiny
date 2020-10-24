@@ -9,6 +9,11 @@
 #' @importFrom glue glue
 #' @importFrom ggrepel geom_text_repel
 
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(glue)
+library(ggrepel)
 
 plot_top <- function(df, x_val, y_val, pnt_color = "red", size_col, label_col, focus_date = NULL){
   
@@ -77,7 +82,7 @@ plot_top_test <- function()
   
 }
 
-plot_top_test()
+#plot_top_test()
   
 #' Generate annotations for a plot in four corners 
 #'
@@ -128,7 +133,7 @@ plot_4_annotate_test <- function(){
   return(plot_4_annotate(plot))
 }
 
-plot_4_annotate_test()
+#plot_4_annotate_test()
 
 
 #' Filter to a focus date 
