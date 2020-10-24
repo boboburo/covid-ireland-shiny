@@ -1,6 +1,6 @@
 on:
-  # Trigger the workflow on push or pull request,
-  # but only for the master branch or can kick off manually 
+  # Trigger the workflow on pull request on master branch 
+  # or can kick off manually if needs be.
   pull_request:
     branches:
       - master
