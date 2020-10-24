@@ -11,7 +11,8 @@ jobs:
       - uses: r-lib/actions/setup-r@master
       - name: install-packages
         run: |
-         Rscript -e "install.packages(c('rsconnect'), type  = 'binary')"
+         Rscript -e "install.packages(c('renv'), type  = 'binary')"
+         Rscript -e "renv::restore()"
       - name: authorise-shiny
         run: |
          Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
