@@ -11,20 +11,20 @@ library(stringr)
 
 POP_GRP = 100000
 
-load_covid_ireland <- function(src = "csv"){
+load_covid_ireland <- function(src = "online_csv"){
   
-  if(src=="csv"){
+  if(src == "online_csv"){
     url <- "https://opendata-geohive.hub.arcgis.com/datasets/d9be85b30d7748b5b7c09450b8aede63_0.csv?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D"
     df   <- read.csv(url)
   }
   
-  if(src=="sqlite"){
+  if(src == "offline_sqlite"){
     
     # Connect to the SQLite DB 
     con <- dbConnect(RSQLite::SQLite(), 
-                     here("covid-ireland.db"))
+                     here("DATA/covid-ireland.db"))
     
-    df <- tbl(con, "dailycases") %>%
+    df <- tbl(con, "dailycases_2020_10_24") %>%
       collect()
     
     dbDisconnect(con) 
@@ -38,6 +38,13 @@ load_covid_ireland <- function(src = "csv"){
   df <- df %>% rename(cumm_cases = ConfirmedCovidCases,
          cumm_inc = PopulationProportionCovidCases) %>%
   clean_names()
+  
+  #change "" to NA and covert two chars columns to numeric
+  df <- df %>%
+    mutate_if(is.character, list(~na_if(., ""))) %>%
+    mutate(cumm_cases = as.integer(cumm_cases),
+           cumm_inc = as.numeric(cumm_inc),
+           population_census16 = as.integer(population_census16))
   
   df <- clean_covid_ireland(df)
   
