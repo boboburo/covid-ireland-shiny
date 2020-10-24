@@ -2,7 +2,7 @@
 
 Shiny application visualising the Covid Situation in the Republic of Ireland. The app is currently published on the RStudio shinyapps.io platform 
 
-https://iboboburo.shinyapps.io/covid-ireland/
+https://iboboburo.shinyapps.io/coviddash/
 
 ## Data Source
 
@@ -43,6 +43,16 @@ docker run -d --rm -p 3838:3838 covid-irl-image
 ```
 
 
+## Deployment
+
+- The app can dpeloyed directly from within R Studio to shinyapps.io
+
+- Alternatively github action can be setup to trigger on a pull request to shiny
+
+```yaml
+
+```
+
 
 # To do
 
@@ -65,3 +75,4 @@ docker run -d --rm -p 3838:3838 covid-irl-image
 - move to tests - note on naming convention, need to change the test file, helper functions. 
 - docker file vs shiny apps.  
 - discuss golem as option vs https://shiny.rstudio.com/reference/shiny/1.5.0/shinyAppTemplate.html
+- make sure that the secrets are setup with '', you have a unique secret for this computer ? will it work a second time 
