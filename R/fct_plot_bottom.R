@@ -9,6 +9,11 @@
   #' @importFrom lubridate days
   #' @importFrom glue glue
   
+
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(glue)
   
   plot_btm <- function(df, x_val = "time_stamp", y_val, county, end_date, days_before, type = "bar"){
     
@@ -24,10 +29,8 @@
   if(class(end_date) != "Date" )
     stop("End date not correct")  
   
-    
 
-  
-  plot <- dailycases %>%
+  plot <-df %>%
     filter(time_stamp <= end_date) %>%
     filter(time_stamp >= end_date - lubridate::days(days_before))%>%
     filter(county_name == county) %>% 
@@ -69,6 +72,6 @@ plot_btm_test <- function(){
   
 }
 
-plot_btm_test()
+#plot_btm_test()
 
   
