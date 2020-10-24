@@ -50,7 +50,20 @@ docker run -d --rm -p 3838:3838 covid-irl-image
 - Alternatively github action can be setup to trigger on a pull request to shiny
 
 ```yaml
-
+jobs:
+  deploy-shiny:
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@master
+      - name: install-packages
+        run: |
+         Rscript -e "install.packages(c('renv'), type  = 'binary')"
+         Rscript -e "renv::restore()"
+      - name: authorise-shiny
+        run: |
+         Rscript -e "rsconnect::setAccountInfo(name='iboboburo', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
+         Rscript -e "rsconnect::deployApp(appName = 'coviddash')"
 ```
 
 
