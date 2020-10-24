@@ -70,7 +70,10 @@ mod_dataviz_bar_server <- function(id,cnty="Dublin",type = "bar",r){
       }
     
     plot <- plot + 
-      theme_light()
+      theme_light() + 
+      theme(axis.title.x = element_text(size = 14),
+            axis.title.y = element_text(size =14),
+            axis.text = element_text(size = 12))
     
     plot
     

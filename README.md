@@ -12,6 +12,16 @@ TODO: Write some test for this based on the return the count and comparing with 
 
 After a search I moved to data pull to [Irelands Open Data Portal](https://data.gov.ie/) and grabbed the [csv data](https://opendata-geohive.hub.arcgis.com/datasets/d9be85b30d7748b5b7c09450b8aede63_0.csv?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D). This has proved to be more stable. 
 
+## Development
+
+Use _renv_ to manage the environment for use in Docker. 
+
+```r
+renv::init()
+renv::install("package_name")
+renv::snapshot()
+```
+
 
 ## Installation 
 
@@ -29,7 +39,7 @@ docker build -t covid-irl-image .
 Run the image 
 
 ```bash
-docker run -d --rm -p 3838:3838 covid-irl-image .
+docker run -d --rm -p 3838:3838 covid-irl-image
 ```
 
 
