@@ -16,7 +16,7 @@ mod_dataviz_scatter_ui <- function(id){
               value = max(dailycases$time_stamp),
               min = min(lubridate::ymd("2020-04-01")), 
               max = max(dailycases$time_stamp),
-              format = "dd-M-yyyy", width = validateCssUnit("15%")),
+              format = "dd-M-yyyy", width = validateCssUnit("35%")),
   plotOutput(NS(id, "plotS"),
                  click = clickOpts(id = NS(id,"plotS_click")))
   )
