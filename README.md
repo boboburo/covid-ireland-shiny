@@ -73,6 +73,7 @@ jobs:
          Rscript -e "renv::restore()"
       - name: authorise-shiny
         run: |
+<<<<<<< Updated upstream
          Rscript -e "rsconnect::setAccountInfo(name='yourAccount', token=${{secrets.SHINYAPPS_TOKEN}}, secret=${{secrets.SHINYAPPS_SECRET}})"
          Rscript -e "rsconnect::deployApp(appName = 'yourAppName')"
 ```
