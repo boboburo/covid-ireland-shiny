@@ -12,11 +12,32 @@ mod_dataviz_scatter_ui <- function(id){
     #             dragRange = FALSE,
     #             timeFormat = "%b-%d",
     #             animate = TRUE),
-    dateInput(NS(id,"slider_sct_date"),label = "Focus Date",
-              value = max(dailycases$time_stamp),
+    dateInput(NS(id,"slider_sct_date"),
+              value = max(dailycases$time_stamp),label = "Focus Date",
               min = min(lubridate::ymd("2020-04-01")), 
               max = max(dailycases$time_stamp),
-              format = "dd-M-yyyy", width = validateCssUnit("15%")),
+              format = "dd-M-yyyy", width = validateCssUnit("50%")),
+    HTML(
+      '<p>
+        <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" 
+        aria-expanded="false" aria-controls="collapseExample">
+          Chart Guide
+        </button>
+       </p>
+        <div class="collapse" id="collapseExample">
+          <div class="card card-body">
+          <ul class="text-info">
+            <li><b> How are rates calculated?</b>: The number of cases over 14 days and scaled to 100k. Say 100 cases for a population of 50000 = (100)/(50,000/100,000)  = 200. 
+                  This allows to compare counties of different sizes</li>
+           <li><b> What are the size of the bubbles?</b> This indicates how large the county is relative to each other. So Dublin is the largest.</li>
+           <li><b> What do the four labels in each corner indicate?</b> 
+            <ul>
+              <li>Lower Rising = Cases are low icompared to other counties, but are rising week on week.</li>
+              <li>Higher Falling = Cases are high compared to other counties, but are dropping week on week.</li>
+            </ul>
+          </ul>
+          </div>
+        </div>'),
   plotOutput(NS(id, "plotS"),
                  click = clickOpts(id = NS(id,"plotS_click")))
   )

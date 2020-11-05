@@ -15,7 +15,7 @@ library(lubridate)
 library(glue)
 library(ggrepel)
 
-plot_top <- function(df, x_val, y_val, pnt_color = "red", size_col, label_col, focus_date = NULL){
+plot_top <- function(df, x_val, y_val, pnt_color = "lightskyblue2", size_col, label_col, focus_date = NULL){
   
   if (missing(df))
     stop("No data frame supplied.")
