@@ -8,10 +8,11 @@
 #
 
 library(shiny)
+library(shinydashboard)
 
 #to do pass the mode in, set in global.R for now 
 launch_app <- function(){
-  shinyOptions(mode = "offline")
+  shinyOptions(mode = "online")
   shinyApp(ui = ui, server = server)
 }
 
