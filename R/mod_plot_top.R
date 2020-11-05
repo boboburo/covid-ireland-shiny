@@ -16,7 +16,7 @@ mod_dataviz_scatter_ui <- function(id){
               value = max(dailycases$time_stamp),label = "Focus Date",
               min = min(lubridate::ymd("2020-04-01")), 
               max = max(dailycases$time_stamp),
-              format = "dd-M-yyyy", width = validateCssUnit("50%")),
+              format = "dd-M-yyyy", width = validateCssUnit("35%")),
     HTML(
       '<p>
         <button class="btn btn-info btn-sm" type="button" data-toggle="collapse" data-target="#collapseExample" 
