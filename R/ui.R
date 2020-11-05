@@ -1,6 +1,7 @@
 # Define UI for application that draws a histogram
 ui <-  shinyUI(
   fluidPage(#theme = shinythemes::shinytheme("flatly"),
+    #useShinydashboard(),
             tags$title("Analyze COVID Numbers in Ireland by County"),
             column(width = 12,
                    h1("COVID Numbers in Ireland by County"),
