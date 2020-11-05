@@ -8,7 +8,6 @@
 #
 
 library(shiny)
-library(shinydashboard)
 
 #to do pass the mode in, set in global.R for now 
 launch_app <- function(){
