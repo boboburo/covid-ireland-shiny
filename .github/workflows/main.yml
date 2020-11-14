@@ -1,12 +1,40 @@
 on:
-  # Trigger the workflow on pull request on master branch 
-  # or can kick off manually if needs be.
+  # manual deploy
+  # trigger the workflow on pull request on master branch 
+  # schedule to run at 2am after the data pull in other flow. 
+  workflow_dispatch:
   pull_request:
     branches:
       - master
-  workflow_dispatch:
+  schedule:
+    - cron: "0 2 * * *"
       
 name: deploy-shiny
+
+jobs:
+  # This workflow contains a single job called "scheduled-fetch-data"
+  scheduled-fetch-data:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkoout the code
+      uses: actions/checkout@v2
+    - name: Set up Python 
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: configure pip caching
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r python_requirements.txt
+    - name: Fetch, update and commit COVID-Ireland data
+      run: . /DATA/get-data.sh
 
 jobs:
   deploy-shiny:
