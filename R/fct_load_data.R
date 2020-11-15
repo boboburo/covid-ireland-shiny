@@ -12,10 +12,9 @@ library(dbplyr)
 
 POP_GRP = 100000
 
-load_covid_ireland <- function(src = "online_csv"){
+load_covid_ireland <- function(src = "offline_sqlite"){
   
   if(src == "online_csv"){
-    #url <- "https://opendata-geohive.hub.arcgis.com/datasets/d9be85b30d7748b5b7c09450b8aede63_0.csv?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D"
     url <- "https://storage.covid19datahub.io/data-2.csv"
     df <- read.csv(url)
     
@@ -25,9 +24,9 @@ load_covid_ireland <- function(src = "online_csv"){
     
     # Connect to the SQLite DB 
     con <- dbConnect(RSQLite::SQLite(), 
-                     here("DATA/covid-ireland.db"))
+                     here("DATA/covid.db"))
     
-    df <- tbl(con, "dailycases_2020_10_24") %>%
+    df <- tbl(con, "data2") %>%
       collect()
     
     dbDisconnect(con) 
@@ -51,10 +50,10 @@ data_aug_covid_ireland <- function(df){
       select(-date)
     
     df <- df %>% mutate(county_name = administrative_area_level_2)
-    df <- df %>% mutate(cumm_cases = confirmed) %>%
+    df <- df %>% mutate(cumm_cases = as.integer(confirmed)) %>%
       select(-confirmed)
     
-    df <- df %>% mutate(population_census16 = population) %>%
+    df <- df %>% mutate(population_census16 = as.integer(population)) %>%
       select(-population)
     
     
