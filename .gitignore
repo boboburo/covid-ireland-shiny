@@ -5,6 +5,7 @@
 
 *.csv
 *.sqlite3
+*.db
 *.dcf #don't push rsconnect info to github
 *.html
 
