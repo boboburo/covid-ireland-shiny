@@ -34,6 +34,8 @@ load_covid_ireland <- function(src = "offline_sqlite"){
     }
     
   df <- df %>% filter(administrative_area_level_1 == "Ireland")
+  df <- distinct(df)
+  df <- df %>% group_by(administrative_area_level_2, date) %>% filter(confirmed == max(confirmed)) %>% ungroup()
   df <- data_aug_covid_ireland(df)
   
 

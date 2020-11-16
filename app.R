@@ -11,7 +11,7 @@ library(shiny)
 
 #to do pass the mode in, set in global.R for now 
 launch_app <- function(){
-  shinyOptions(mode = "online")
+  shinyOptions(mode = "offline")
   shinyApp(ui = ui, server = server)
 }
 
