@@ -8,6 +8,7 @@ library(lubridate)
 library(tidyr)
 library(stringr)
 library(dbplyr)
+library(log4r)
 
 
 POP_GRP = 100000
@@ -24,7 +25,7 @@ load_covid_ireland <- function(src = "offline_sqlite"){
     
     # Connect to the SQLite DB 
     con <- dbConnect(RSQLite::SQLite(), 
-                     here("DATA/covid.db"))
+                     here("covid.db"))
     
     df <- tbl(con, "data2") %>%
       collect()
