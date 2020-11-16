@@ -25,7 +25,7 @@ load_covid_ireland <- function(src = "offline_sqlite"){
     
     # Connect to the SQLite DB 
     con <- dbConnect(RSQLite::SQLite(), 
-                     here("covid.db"))
+                     here("DATA/covid.db"))
     
     df <- tbl(con, "data2") %>%
       collect()
