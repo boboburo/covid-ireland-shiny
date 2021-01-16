@@ -13,7 +13,7 @@ library(log4r)
 
 POP_GRP = 100000
 
-load_covid_ireland <- function(src = "offline_sqlite"){
+load_covid_ireland <- function(src = "online_csv"){
   
   if(src == "online_csv"){
     url <- "https://storage.covid19datahub.io/data-2.csv"

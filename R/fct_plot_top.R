@@ -75,7 +75,7 @@ plot_top_test <- function()
  # last_days = dailycases %>% filter(time_stamp == max(time_stamp))
   mst_rcnt = max(dailycases$time_stamp)
   
-  plot_top(dailycases, x_val = "plt1_x", 
+  plot_top(dayilycases, x_val = "plt1_x", 
            y_val = "plt1_y", 
            size_col = "population_census16", 
            label_col = "county_name", focus_date = ymd("2020-05-11"))

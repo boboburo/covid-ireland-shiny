@@ -6,6 +6,7 @@ library(dplyr)
 
 mod_dataviz_bar_ui <- function(id){
   
+  start_date <- ymd("20200701")
   end_date <- max(dailycases$time_stamp)
   
 tagList(
